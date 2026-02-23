@@ -1,0 +1,12 @@
+baseURL      = "https://yager.me/"
+languageCode = "en-us"
+title        = "Eric Yager"
+theme        = "LucentLink-Hugo"
+minVersion   = "0.115.0"
+
+[params]
+  description     = "Eric Yager's personal link sharing page"
+  googleAnalytics = "" 
+
+[outputs]
+  home = ["HTML"]
