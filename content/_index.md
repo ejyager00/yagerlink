@@ -11,7 +11,7 @@ socials:
     icon: "fab fa-linkedin"
   - url: "https://x.com/EricYager4"
     icon: "fab fa-x-twitter"
-  - url: "https://instagram.com/yourhandle"
+  - url: "https://instagram.com/eric_yager"
     icon: "fab fa-instagram"
   - url: "https://ericyager.com"
     icon: "fas fa-globe"
