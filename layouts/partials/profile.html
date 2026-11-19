@@ -3,8 +3,10 @@
     {{ with .Params.profileImage }}
       {{/* strip leading “/” if present, otherwise leave as-is */}}
       {{ $img := replaceRE "^/" "" . }}
+      {{- $size := imageConfig (path.Join "static" $img) }}
       <img src="{{ $img }}"
            alt="{{ $.Params.name }}"
+           width="{{ $size.Width }}" height="{{ $size.Height }}"
            class="profile-pic mb-4">
     {{ end }}
     <h1 class="text-3xl font-bold mb-2 text-center" style="color: var(--text-color)">
@@ -18,7 +20,7 @@
         {{- if not (templates.Exists (printf "partials/%s" $icon)) }}
           {{- errorf "socials: %q has no icon partial layouts/partials/%s" .url $icon }}
         {{- end }}
-        <a href="{{ .url }}" class="text-xl" target="_blank" rel="noopener"{{ with .label }} aria-label="{{ . }}"{{ end }}>
+        <a href="{{ .url }}" class="text-xl" target="_blank" rel="me noopener"{{ with .label }} aria-label="{{ . }}"{{ end }}>
           {{ partial $icon }}
         </a>
       {{ end }}

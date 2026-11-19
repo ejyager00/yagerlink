@@ -5,6 +5,7 @@ profileImage: "images/img-512.webp"    # path under static/
 previewImage: "images/og.jpg"          # link-preview image (JPG for LinkedIn etc.)
 name: "Eric Yager"
 description: "👨‍💻 Software engineer  📍Carmel, IN"
+seoDescription: "Eric Yager is a senior software engineer in Indiana with interests in DevOps, serverless architectures, and AI-enabled development."  # search results & link previews
 socials:
   # svg: name of an icon partial in layouts/partials/icons/
   - url: "https://github.com/ejyager00"
@@ -13,6 +14,7 @@ socials:
   - url: "https://git.yager.me/explore"
     svg: "forgejo"
     label: "Forgejo"
+    sameAs: false         # a site index, not a profile; omit from structured data
   - url: "https://linkedin.com/in/eric-yager"
     svg: "linkedin"
     label: "LinkedIn"
@@ -28,6 +30,10 @@ socials:
   - url: "https://orcid.org/0000-0002-3691-7801"
     svg: "orcid"
     label: "ORCID"
+
+# Extra profiles for structured data only (not shown as icons)
+sameAs:
+  - "https://x.com/EricYager4"
 
 # You can add as many links as you want!
 

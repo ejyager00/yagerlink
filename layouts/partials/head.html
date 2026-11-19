@@ -3,18 +3,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ .Site.Title }}</title>
     {{- $title := .Params.name | default .Site.Title }}
-    {{- $desc := .Params.description | default .Site.Params.description }}
+    {{- $desc := .Params.seoDescription | default .Params.description | default .Site.Params.description }}
     {{- $img := .Params.previewImage | default .Params.profileImage }}
 
     <meta name="title" content="{{ $title }}" />
     <meta name="description" content="{{ $desc }}" />
+    <link rel="canonical" href="{{ .Permalink }}" />
 
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="{{ .Site.Title }}" />
     <meta property="og:url" content="{{ .Permalink }}" />
     <meta property="og:title" content="{{ $title }}" />
     <meta property="og:description" content="{{ $desc }}" />
     {{- with $img }}
     <meta property="og:image" content="{{ replaceRE "^/" "" . | absURL }}" />
+    <meta property="og:image:alt" content="Photo of {{ $title }}" />
     {{- end }}
 
     <meta name="twitter:card" content="summary" />
@@ -22,7 +25,18 @@
     <meta name="twitter:description" content="{{ $desc }}" />
     {{- with $img }}
     <meta name="twitter:image" content="{{ replaceRE "^/" "" . | absURL }}" />
+    <meta name="twitter:image:alt" content="Photo of {{ $title }}" />
     {{- end }}
+
+    {{- /* Structured data: ties the social profiles to one person for search engines.
+           Socials with `sameAs: false` (e.g. not a personal profile) are left out;
+           front matter `sameAs` adds profiles that aren't shown as icons. */}}
+    {{- $sameAs := slice }}
+    {{- range .Params.socials }}{{ if ne .sameAs false }}{{ $sameAs = $sameAs | append .url }}{{ end }}{{ end }}
+    {{- with .Params.sameAs }}{{ $sameAs = $sameAs | append . }}{{ end }}
+    {{- $person := dict "@context" "https://schema.org" "@type" "Person" "name" $title "url" .Permalink "sameAs" $sameAs }}
+    {{- with .Params.profileImage }}{{ $person = merge $person (dict "image" (replaceRE "^/" "" . | absURL)) }}{{ end }}
+    <script type="application/ld+json">{{ $person | jsonify | safeJS }}</script>
 
     <link rel="stylesheet" href="css/style.css">
     {{ $tailwind := resources.Get "css/tailwind.css" | postCSS }}
