@@ -3,6 +3,7 @@ languageCode = "en-us"
 title        = "Eric Yager"
 minVersion   = "0.115.0"
 disableKinds = ["taxonomy", "term"]
+enableRobotsTXT = true   # layouts/robots.txt
 
 [params]
   description     = "Eric Yager's personal link sharing page"
