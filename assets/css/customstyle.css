@@ -37,7 +37,7 @@
     vertical-align: -0.125em;
 }
 
-/* Background modes (static/js/background.js) */
+/* Background modes (assets/js/background.js) */
 .bg-animation canvas {
     position: absolute;
     inset: 0;

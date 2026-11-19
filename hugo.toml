@@ -14,8 +14,9 @@ enableRobotsTXT = true   # layouts/robots.txt
 [outputs]
   home = ["HTML"]
 
-# Theme, imported with explicit mounts so only its stylesheet is published
-# (its demo images, favicons, and script.js are unused).
+# Theme, imported with explicit mounts: only its stylesheet is used, mounted into
+# assets/ so it's bundled with the site CSS (its demo images, favicons, and
+# script.js are not published).
 [[module.imports]]
   path = "LucentLink-Hugo"
   [[module.imports.mounts]]
@@ -23,5 +24,5 @@ enableRobotsTXT = true   # layouts/robots.txt
     target = "layouts"
   [[module.imports.mounts]]
     source = "static"
-    target = "static"
+    target = "assets"
     files  = ["css/style.css"]

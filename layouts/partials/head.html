@@ -43,11 +43,15 @@
     <script type="application/ld+json">{{ $profile | jsonify | safeJS }}</script>
     {{- end }}{{/* .IsHome */}}
 
-    <link rel="stylesheet" href="/css/style.css">
-    {{ $tailwind := resources.Get "css/tailwind.css" | postCSS }}
-    <link rel="stylesheet" href="{{ $tailwind.RelPermalink }}">
+    {{- /* One bundle: theme CSS, Tailwind, then site overrides; minified and fingerprinted
+           (the hash in the filename lets _headers cache it forever). */}}
+    {{- $css := slice
+          (resources.Get "css/style.css")
+          (resources.Get "css/tailwind.css" | postCSS)
+          (resources.Get "css/customstyle.css")
+        | resources.Concat "css/site.css" | minify | fingerprint }}
+    <link rel="stylesheet" href="{{ $css.RelPermalink }}">
     <link rel="preload" href="/fonts/poppins-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="/css/customstyle.css">
     <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">

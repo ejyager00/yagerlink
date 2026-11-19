@@ -2,4 +2,5 @@
 {{- $bg := site.Params.background | default "bubbles" }}
 {{- if reflect.IsSlice $bg }}{{ $bg = delimit $bg "," }}{{ end }}
 <div class="bg-animation" id="bgAnimation" data-bg="{{ $bg }}"></div>
-<script src="/js/background.js" defer></script>
+{{- $js := resources.Get "js/background.js" | minify | fingerprint }}
+<script src="{{ $js.RelPermalink }}" defer></script>
