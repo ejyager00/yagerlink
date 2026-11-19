@@ -3,7 +3,7 @@ title: "Eric Yager"
 # Profile settings
 profileImage: "images/img.webp"        # path under static/
 name: "Eric Yager"
-description: "👨‍💻 Software engineer  📍Indianapolis"
+description: "👨‍💻 Software engineer  📍Carmel, IN"
 socials:
   - url: "https://github.com/ejyager00"
     icon: "fab fa-github"
