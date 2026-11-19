@@ -45,3 +45,9 @@
     12%, 36%     { transform: scaleY(-0.4); }
     60%, 100%    { transform: scaleY(0.55); }
 }
+
+/* Fit the visible viewport on mobile (100vh ignores the browser's address bar) */
+body {
+    min-height: 100vh;
+    min-height: 100dvh;
+}
