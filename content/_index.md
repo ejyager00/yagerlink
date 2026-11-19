@@ -7,7 +7,7 @@ description: "👨‍💻 Software engineer  📍Carmel, IN"
 socials:
   - url: "https://github.com/ejyager00"
     icon: "fab fa-github"
-  - url: "https://git.yager.me"
+  - url: "https://git.yager.me/explore"
     svg: "forgejo"        # layouts/partials/icons/forgejo.html
     label: "Forgejo"
   - url: "https://linkedin.com/in/eric-yager"
