@@ -10,5 +10,8 @@ export default defineConfig({
 		observability: {
 			enabled: true,
 		},
+		assets: {
+			notFoundHandling: "404-page", // serve public/404.html with a 404 status
+		},
 	},
 });

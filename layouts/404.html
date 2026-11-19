@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+{{ partial "head.html" . }}
+
+<body>
+    {{ partial "background.html" . }}
+
+    <main class="container mx-auto px-4 py-12 max-w-md min-h-dvh flex flex-col items-center justify-center text-center">
+        <p class="text-7xl font-bold mb-2" style="color: var(--text-color)">404</p>
+        <h1 class="text-xl mb-8 opacity-80">This page doesn't exist.</h1>
+        <a href="/" class="link-card px-6 py-3 font-medium">Back to {{ site.Title }}</a>
+    </main>
+</body>
+
+</html>

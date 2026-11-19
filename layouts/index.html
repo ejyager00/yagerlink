@@ -3,10 +3,7 @@
 {{ partial "head.html" . }}
 
 <body>
-    <!-- Background Animation -->
-    {{- $bg := site.Params.background | default "bubbles" }}
-    {{- if reflect.IsSlice $bg }}{{ $bg = delimit $bg "," }}{{ end }}
-    <div class="bg-animation" id="bgAnimation" data-bg="{{ $bg }}"></div>
+    {{ partial "background.html" . }}
 
     <div class="container mx-auto px-4 py-12 max-w-md min-h-dvh flex flex-col">
         <!-- Profile Section -->
@@ -32,7 +29,6 @@
 
     </div>
 
-    <script src="js/background.js"></script>
 </body>
 
 </html>
