@@ -1,0 +1,7 @@
+#!/bin/sh
+# Run a command (default: interactive bash) in the project's FHS dev container.
+cd "$(dirname "$0")" || exit 1
+[ $# -eq 0 ] && set -- bash
+exec guix shell -m manifest.scm --container --emulate-fhs --network \
+  --share="$HOME/.config/cloudflare" \
+  -- env DO_NOT_TRACK=1 "$@"

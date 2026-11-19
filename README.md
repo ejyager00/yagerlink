@@ -6,15 +6,14 @@ Implemented using [Hugo](https://gohugo.io/) with the [LucentLink](https://githu
 
 ## Development
 
-Tooling comes from `manifest.scm` (Hugo via nonguix). `workerd` needs an FHS
-loader, so run everything in a container:
+Tooling comes from `manifest.scm` (Hugo via nonguix). `./dev <cmd>` runs a
+command in an FHS container (needed for `workerd`); no args gives a shell.
 
 ```sh
 git submodule update --init
-guix shell -m manifest.scm --container --emulate-fhs --network -- bash
-export DO_NOT_TRACK=1   # disable cf telemetry
-npm ci
-npm run dev       # hugo server
-npm run preview   # hugo build + cf dev (Workers runtime)
-npm run deploy    # hugo build + cf deploy (run `npx cf auth login` first)
+./dev npm ci
+./dev npm run dev       # hugo server
+./dev npm run build     # hugo --minify -> public/
+./dev npm run preview   # build + cf dev (Workers runtime)
+./dev npm run deploy    # build + cf deploy (`./dev npx cf auth login` first)
 ```
