@@ -8,6 +8,7 @@ disableKinds = ["taxonomy", "term"]
 [params]
   description     = "Eric Yager's personal link sharing page"
   googleAnalytics = "" 
+  background      = "lava"   # bubbles | lava | murmuration | birds | fireflies | none
 
 [outputs]
   home = ["HTML"]

@@ -8,3 +8,39 @@
     height: 1em;
     vertical-align: -0.125em;
 }
+
+/* Background modes (static/js/background.js) */
+.bg-animation canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+.bird {
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: rgba(255, 255, 255, 0.9);
+    will-change: transform;
+}
+.bird svg {
+    display: block;
+    width: 100%;
+    overflow: visible;
+}
+.bird path {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transform-box: fill-box;
+    transform-origin: 50% 100%;
+    animation: flap var(--flap, 2.4s) ease-in-out var(--flap-delay, 0s) infinite;
+}
+/* flap, flap, glide */
+@keyframes flap {
+    0%, 24%, 48% { transform: scaleY(1); }
+    12%, 36%     { transform: scaleY(-0.4); }
+    60%, 100%    { transform: scaleY(0.55); }
+}
