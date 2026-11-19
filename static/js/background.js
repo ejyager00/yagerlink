@@ -1,5 +1,5 @@
 // Background animations. Pick one with params.background in hugo.toml:
-//   bubbles | lava | murmuration | birds | fireflies | none
+//   bubbles | lava | murmuration | birds | fireflies | none | random (any but none, per load)
 // With prefers-reduced-motion, canvas modes draw one still frame and DOM modes render nothing.
 (() => {
   const root = document.getElementById('bgAnimation');
@@ -201,5 +201,10 @@
     none() {},
   };
 
-  (modes[root.dataset.bg] || modes.bubbles)();
+  let mode = root.dataset.bg;
+  if (mode === 'random') {
+    const pool = Object.keys(modes).filter(m => m !== 'none');
+    mode = pool[Math.floor(Math.random() * pool.length)];
+  }
+  (modes[mode] || modes.bubbles)();
 })();
