@@ -4,6 +4,7 @@
     <title>{{ .Site.Title }}</title>
     {{- $title := .Params.name | default .Site.Title }}
     {{- $desc := .Params.description | default .Site.Params.description }}
+    {{- $img := .Params.previewImage | default .Params.profileImage }}
 
     <meta name="title" content="{{ $title }}" />
     <meta name="description" content="{{ $desc }}" />
@@ -12,14 +13,14 @@
     <meta property="og:url" content="{{ .Permalink }}" />
     <meta property="og:title" content="{{ $title }}" />
     <meta property="og:description" content="{{ $desc }}" />
-    {{- with .Params.profileImage }}
+    {{- with $img }}
     <meta property="og:image" content="{{ replaceRE "^/" "" . | absURL }}" />
     {{- end }}
 
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content="{{ $title }}" />
     <meta name="twitter:description" content="{{ $desc }}" />
-    {{- with .Params.profileImage }}
+    {{- with $img }}
     <meta name="twitter:image" content="{{ replaceRE "^/" "" . | absURL }}" />
     {{- end }}
 

@@ -1,7 +1,8 @@
 ---
 title: "Eric Yager"
 # Profile settings
-profileImage: "images/img.webp"        # path under static/
+profileImage: "images/img-512.webp"    # path under static/
+previewImage: "images/og.jpg"          # link-preview image (JPG for LinkedIn etc.)
 name: "Eric Yager"
 description: "👨‍💻 Software engineer  📍Carmel, IN"
 socials:
