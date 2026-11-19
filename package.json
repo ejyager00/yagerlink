@@ -2,17 +2,20 @@
 	"name": "yagerlink",
 	"version": "0.0.0",
 	"private": true,
+	"type": "module",
 	"scripts": {
-		"deploy": "wrangler deploy",
-		"dev": "wrangler dev",
-		"start": "wrangler dev"
+		"build": "hugo --minify",
+		"dev": "hugo server",
+		"preview": "npm run build && cf dev",
+		"deploy": "npm run build && cf deploy"
 	},
 	"devDependencies": {
 		"@tailwindcss/postcss": "^4.2.1",
 		"autoprefixer": "^10.4.24",
+		"cf": "^1.0.0-rc.2",
 		"postcss": "^8.5.6",
 		"postcss-cli": "^11.0.1",
 		"tailwindcss": "^4.2.1",
-		"wrangler": "^4.68.0"
+		"wrangler": "^4.165.0"
 	}
 }
