@@ -28,15 +28,16 @@
     <meta name="twitter:image:alt" content="Photo of {{ $title }}" />
     {{- end }}
 
-    {{- /* Structured data: ties the social profiles to one person for search engines.
+    {{- /* Structured data: a ProfilePage about one Person, tying the social profiles to one person for search engines.
            Socials with `sameAs: false` (e.g. not a personal profile) are left out;
            front matter `sameAs` adds profiles that aren't shown as icons. */}}
     {{- $sameAs := slice }}
     {{- range .Params.socials }}{{ if ne .sameAs false }}{{ $sameAs = $sameAs | append .url }}{{ end }}{{ end }}
     {{- with .Params.sameAs }}{{ $sameAs = $sameAs | append . }}{{ end }}
-    {{- $person := dict "@context" "https://schema.org" "@type" "Person" "name" $title "url" .Permalink "sameAs" $sameAs }}
+    {{- $person := dict "@type" "Person" "name" $title "url" .Permalink "sameAs" $sameAs }}
     {{- with .Params.profileImage }}{{ $person = merge $person (dict "image" (replaceRE "^/" "" . | absURL)) }}{{ end }}
-    <script type="application/ld+json">{{ $person | jsonify | safeJS }}</script>
+    {{- $profile := dict "@context" "https://schema.org" "@type" "ProfilePage" "url" .Permalink "mainEntity" $person }}
+    <script type="application/ld+json">{{ $profile | jsonify | safeJS }}</script>
 
     <link rel="stylesheet" href="css/style.css">
     {{ $tailwind := resources.Get "css/tailwind.css" | postCSS }}
