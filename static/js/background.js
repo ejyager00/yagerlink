@@ -1,5 +1,6 @@
 // Background animations. Pick one with params.background in hugo.toml:
 //   bubbles | lava | murmuration | birds | fireflies | none | random (any but none, per load)
+// or a list of those, e.g. ["lava", "birds"], to pick one of them at random per load.
 // With prefers-reduced-motion, canvas modes draw one still frame and DOM modes render nothing.
 (() => {
   const root = document.getElementById('bgAnimation');
@@ -161,10 +162,11 @@
         ).onfinish = () => el.remove();
       };
       const spawn = () => {
-        if (root.childElementCount < (small() ? 2 : 4)) fly();
-        setTimeout(spawn, rand(3000, 9000));
+        if (root.childElementCount < (small() ? 4 : 8)) fly();
+        setTimeout(spawn, rand(1500, 4500));
       };
       fly();
+      setTimeout(fly, rand(500, 2000));
       setTimeout(spawn, rand(1500, 4000));
     },
 
@@ -201,10 +203,8 @@
     none() {},
   };
 
-  let mode = root.dataset.bg;
-  if (mode === 'random') {
-    const pool = Object.keys(modes).filter(m => m !== 'none');
-    mode = pool[Math.floor(Math.random() * pool.length)];
-  }
-  (modes[mode] || modes.bubbles)();
+  // A comma-separated list picks one at random per load; "random" means every mode but none.
+  let pool = (root.dataset.bg || '').split(',').map(m => m.trim()).filter(m => m in modes || m === 'random');
+  if (pool.includes('random')) pool = Object.keys(modes).filter(m => m !== 'none');
+  (modes[pool[Math.floor(Math.random() * pool.length)]] || modes.bubbles)();
 })();
