@@ -14,8 +14,12 @@
   
     <div class="flex flex-wrap justify-center gap-4 mb-8 social-icons">
       {{ range .Params.socials }}
+        {{- $icon := printf "icons/%s.html" .svg }}
+        {{- if not (templates.Exists (printf "partials/%s" $icon)) }}
+          {{- errorf "socials: %q has no icon partial layouts/partials/%s" .url $icon }}
+        {{- end }}
         <a href="{{ .url }}" class="text-xl" target="_blank" rel="noopener"{{ with .label }} aria-label="{{ . }}"{{ end }}>
-          {{ with .svg }}{{ partial (printf "icons/%s.html" .) }}{{ else }}<i class="{{ .icon }} icon"></i>{{ end }}
+          {{ partial $icon }}
         </a>
       {{ end }}
     </div>

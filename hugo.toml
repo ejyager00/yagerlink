@@ -1,7 +1,6 @@
 baseURL      = "https://yager.me/"
 languageCode = "en-us"
 title        = "Eric Yager"
-theme        = "LucentLink-Hugo"
 minVersion   = "0.115.0"
 disableKinds = ["taxonomy", "term"]
 
@@ -13,3 +12,15 @@ disableKinds = ["taxonomy", "term"]
 
 [outputs]
   home = ["HTML"]
+
+# Theme, imported with explicit mounts so only its stylesheet is published
+# (its demo images, favicons, and script.js are unused).
+[[module.imports]]
+  path = "LucentLink-Hugo"
+  [[module.imports.mounts]]
+    source = "layouts"
+    target = "layouts"
+  [[module.imports.mounts]]
+    source = "static"
+    target = "static"
+    includeFiles = "css/style.css"

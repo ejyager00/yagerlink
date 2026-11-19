@@ -6,31 +6,42 @@ previewImage: "images/og.jpg"          # link-preview image (JPG for LinkedIn et
 name: "Eric Yager"
 description: "👨‍💻 Software engineer  📍Carmel, IN"
 socials:
+  # svg: name of an icon partial in layouts/partials/icons/
   - url: "https://github.com/ejyager00"
-    icon: "fab fa-github"
+    svg: "github"
+    label: "GitHub"
   - url: "https://git.yager.me/explore"
-    svg: "forgejo"        # layouts/partials/icons/forgejo.html
+    svg: "forgejo"
     label: "Forgejo"
   - url: "https://linkedin.com/in/eric-yager"
-    icon: "fab fa-linkedin"
+    svg: "linkedin"
+    label: "LinkedIn"
   # - url: "https://x.com/EricYager4"
-  #   icon: "fab fa-x-twitter"
+  #   svg: "x-twitter"
+  #   label: "X"
   - url: "https://instagram.com/eric_yager"
-    icon: "fab fa-instagram"
+    svg: "instagram"
+    label: "Instagram"
   - url: "https://ericyager.com"
-    icon: "fas fa-globe"
+    svg: "globe"
+    label: "Website"
   - url: "https://orcid.org/0000-0002-3691-7801"
-    icon: "fab fa-orcid"
+    svg: "orcid"
+    label: "ORCID"
 
 # You can add as many links as you want!
 
 # Link cards
+# NOTE: link-card.html (theme) renders `icon` as a Font Awesome <i> class, but Font Awesome
+# is no longer loaded. Before enabling, override it to use layouts/partials/icons/ like profile.html.
 # links:
 #   - href: "https://orcid.org/0000-0002-3691-7801"
 #     icon: "fab fa-orcid"
 #     title: "ORCID"
 #     description: "See my research projects"
 
+# NOTE: spotify-playlist.html (theme) uses a Font Awesome icon (fa-spotify), which is no longer
+# loaded. Before enabling, override it with an SVG partial from layouts/partials/icons/.
 # Spotify playlist embed. You can add embed by rigth clicking on your spotify playlist -> Share -> Copy embed. After copying the embed, replace it with the iframe below.
 # spotifyPlaylist:
 #   iframe: '<iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/6zcsSLDrLiCpX8KDzNiIhS?utm_source=generator" width="100%" height="152" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>'
