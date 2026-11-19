@@ -10,8 +10,9 @@
   const small = () => innerWidth < 600;
 
   // Full-viewport canvas. `scale` is canvas px per CSS px (default: devicePixelRatio).
-  // frame(t, dt) runs every animation frame, or after `warmup` simulated steps when still.
-  function run(scale, setup, frame, warmup = 1) {
+  // frame(t, dt) runs every animation frame (capped at `fps` if given), or after `warmup`
+  // simulated steps when still.
+  function run(scale, setup, frame, { warmup = 1, fps } = {}) {
     const c = document.createElement('canvas');
     root.appendChild(c);
     const v = { ctx: c.getContext('2d'), c, w: 0, h: 0 };
@@ -29,11 +30,13 @@
     const drawStill = () => { for (let i = 0; i < warmup; i++) frame(i / 60, 1 / 60); };
     addEventListener('resize', () => { fit(); if (still) drawStill(); });
     if (still) return drawStill();
+    const gap = fps ? 1000 / fps - 2 : 0; // 2 ms slack for rAF timing jitter
     let last = performance.now();
     const tick = now => {
+      requestAnimationFrame(tick);
+      if (now - last < gap) return;
       frame(now / 1000, Math.min((now - last) / 1000, 0.05));
       last = now;
-      requestAnimationFrame(tick);
     };
     requestAnimationFrame(tick);
   }
@@ -91,7 +94,7 @@
           }
         }
         view.ctx.putImageData(img, 0, 0);
-      });
+      }, { fps: 30 }); // per-pixel CPU work; 30 fps is plenty for slow blobs
     },
 
     // Boids flock steered by a wandering target, drawn as short strokes.
@@ -136,7 +139,7 @@
         ctx.beginPath();
         for (const b of birds) { ctx.moveTo(b.x, b.y); ctx.lineTo(b.x - b.vx * 2, b.y - b.vy * 2); }
         ctx.stroke();
-      }, 300);
+      }, { warmup: 300 });
     },
 
     // Occasional gulls gliding across; smaller ones are fainter and slower (parallax).
@@ -197,7 +200,7 @@
           ctx.fillRect(q.x - R, q.y - R, R * 2, R * 2);
         }
         ctx.globalCompositeOperation = 'source-over';
-      }, 90);
+      }, { warmup: 90 });
     },
 
     none() {},
